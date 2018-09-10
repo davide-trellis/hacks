@@ -5,10 +5,9 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetBatchLines -1 ; run as fast as possible
 
 expectedParmCnt=2
+nbrOfParms=%0%
 
-; The left side of a non-expression if-statement is always the name of a variable.
-
-if 0 < %expectedParmCnt% 
+if (nbrOfParms < expectedParmCnt)
 {
     MsgBox,%A_ScriptName% requires at least %expectedParmCnt%  incoming parameters but it only received %0%.
     ExitApp
@@ -16,14 +15,9 @@ if 0 < %expectedParmCnt%
 
 taskNm=%1%
 
-; msgbox,%taskNm%
-
 if (taskNm == "jira0")
 {
-    parm := %2%  ; Fetch the contents of the variable whose name is contained in A_Index.
-    ;~ MsgBox, 4,, Parameter number %A_Index% is %parm%.  Continue?
-    ;~ IfMsgBox, No
-        ;~ break
+    parm := %2%
     url0=https://trellis.atlassian.net/browse/%parm%
     run,%url0%
 } else if (taskNm == "copy-work-around") {

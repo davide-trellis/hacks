@@ -5,8 +5,9 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetBatchLines -1 ; run as fast as possible
 
 expectedParmCnt=2
+nbrOfParms=%0%
 
-if 0 < %expectedParmCnt% 
+if (nbrOfParms < expectedParmCnt)
 {
     MsgBox,%A_ScriptName% requires at least %expectedParmCnt%  incoming parameters but it only received %0%.
     ExitApp
@@ -16,7 +17,7 @@ taskNm=%1%
 
 if (taskNm == "jira0")
 {
-    parm := %2%
+    parm=%2%
     url0=https://trellis.atlassian.net/browse/%parm%
     run,%url0%
 } else if (taskNm == "copy-work-around") {
